@@ -8,31 +8,16 @@
     <title>Coding Quiz</title>
   </head>
   <body>
-    <div class="clearfix">
       <div class="card">
-        <h2>Sign Up</h2>
-        <form method="POST">
-          <div class="input-group">
-            <label for="first-name">First Name</label>
-            <input type="text" name="first-name" id="first-name" placeholder="Jane" />
-          </div>
-          <div class="input-group">
-            <label for="last-name">Last Name</label>
-            <input type="text" name="last-name" id="last-name" placeholder="Doe" />
-          </div>
-          <div class="input-group">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="janedoe@mail.com" />
-          </div>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="supersecure123" />
-          </div>
-          <div id="msg"></div>
-          <button id="sign-up">Sign Up</button>
-        </form>
-      </div>
-
+        <h2>Coding Quiz Challenge</h2>
+        <p>
+            This is a timed quiz to test your understanding of JavaScript. You will be given 75 seconds to answer 
+            five questions. Each wrong answer will subtract 10 seconds from the clock. When you have answered all 
+            five questions or time has expired, your score will be displayed. You will then be prompted to enter 
+            your initials and save your score. Begin by clicking on the "Start Quiz" button.
+        </p>
+        <button class="start-quiz">Start Quiz</button>
+      </div> <!--class = card-->
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
