@@ -18,8 +18,17 @@ h3 {
   text-align: center;
 }
 ul {
+  background-color: white;
   list-style: none;
 }
+.correct {
+  background-color: #28a745;
+}
+
+.incorrect {
+  background-color: #dc3545;
+}
+
 
 button {
   background-color: #001b44;
