@@ -1,11 +1,16 @@
 let secondsRemaining = 75;
+let timerP = document.getElementById("timer")
+let correctText = document.getElementById("correct-text");
+let incorrectText = document.getElementById("incorrect-text");
+
 var qCtr = 0
 var acceptingAnswers = false
 var penaltyCount = 0;
-const QUESTION_COUNT = 4;
+const QUESTION_COUNT = 5;
+const HIDDEN_CLASS = "hidden"
 const CORRECT_CLASS = "correct";
 const INCORRECT_CLASS = "incorrect";
-const INCORRECT_PENALTY = 15;
+const INCORRECT_PENALTY = 10;
 startQuiz();
 // function loadQuestion() {
 // populates the questions object with the question, 4 answers and the correct answer
@@ -42,6 +47,14 @@ function loadQuestions() {
         ans4: "$$",
         correct: 1,
     },
+    {
+        q: "Which of the following is NOT a primitive datatype in javascript?",
+        ans1: "Boolean",
+        ans2: "Undefined",
+        ans3: "Imaginary#",
+        ans4: "Number",
+        correct: 2,
+    },
 
     ];
     // console.log("Load Questions: " + questions)
@@ -52,10 +65,10 @@ function displayQuestion(question, h3El, liEls) {
     console.log("function displayQuestion(question, h3El, liEls)");
     console.log("displayQuestion qCtr = " + qCtr + " QUESTION_COUNT = " + QUESTION_COUNT);
     if (qCtr == QUESTION_COUNT) {
-        //localStorage.setItem('mostRecentScore', score);
-        return window.location.assign('./end.html');
+        localStorage.setItem('mostRecentScore', secondsRemaining);
+        return window.location.assign('./saveScore.html');
     }
-    h3El.innerText = question.q; 
+    h3El.innerText = question.q;
     // console.log(question.q);
     // console.log(question.ans1);
     // console.log(question.ans2);
@@ -95,11 +108,17 @@ function addChoicesListeners() {
             // console.log("Selected answer = " + selectedAnswer);
             // console.log("Correct Answer? " + selectedChoice.dataset.isCorrect);
             // console.log("Selected Choice class list " + selectedChoice.classList);
+            console.log("incorrectText " + incorrectText.innerText);
             if (selectedChoice.dataset.isCorrect == "true") {
                 answerClass = CORRECT_CLASS;
+                incorrectText.classList.add(HIDDEN_CLASS);
+                correctText.classList.remove(HIDDEN_CLASS);
             } else {
                 answerClass = INCORRECT_CLASS;
+                correctText.classList.add(HIDDEN_CLASS);
+                incorrectText.classList.remove(HIDDEN_CLASS);
                 secondsRemaining = secondsRemaining - INCORRECT_PENALTY;
+                timerP.innerText = "Time: " + secondsRemaining;
             }
             selectedChoice.classList.add(answerClass);
 
@@ -107,24 +126,32 @@ function addChoicesListeners() {
                 selectedChoice.classList.remove(answerClass);
                 console.log("setTimeout qCtr = " + qCtr);
                 qCtr++;
+                if (qCtr == QUESTION_COUNT) {
+                    console.log("secondsRemaining = " + secondsRemaining);
+                    localStorage.setItem('mostRecentScore', secondsRemaining);
+                    return window.location.assign('./saveScore.html');
+
+                }
                 console.log("setTimeout before displayQuestion qCtr = " + qCtr);
                 displayQuestion(questions[qCtr], document.querySelector("h3"), document.querySelectorAll("li"));
             }, 1000);
         });
     });
 }//function addChoicesListeners()
-function updateCountdown(){
+function updateCountdown() {
     secondsRemaining--;
     console.log("secondsRemaining = " + secondsRemaining);
+    timerP.innerText = "Time: " + secondsRemaining;
     if (secondsRemaining == 0) {
-        return window.location.assign('./end.html');
+        localStorage.setItem('mostRecentScore', secondsRemaining);
+        return window.location.assign('./saveScore.html');
     }
 
 }
-function startQuiz(){
-var questions = loadQuestions();
-setInterval(updateCountdown, 1000);
-displayQuestion(questions[qCtr], document.querySelector("h3"), document.querySelectorAll("li"));
-addChoicesListeners();
+function startQuiz() {
+    var questions = loadQuestions();
+    setInterval(updateCountdown, 1000);
+    displayQuestion(questions[qCtr], document.querySelector("h3"), document.querySelectorAll("li"));
+    addChoicesListeners();
 }
 

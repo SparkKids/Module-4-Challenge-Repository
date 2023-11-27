@@ -43,16 +43,6 @@ button {
   margin-top: 0.6em;
   
 }
-
-.input-group {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-label {
-  color: #212121;
-}
-
 input {
   background-color: whitesmoke;
   border-radius: 3px;
@@ -70,13 +60,22 @@ input {
   transition-property: background-color, color;
   transition-timing-function: ease, ease;
   vertical-align: middle;
-  width: 100%;
+  width: 33%;
 }
+.input-group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  color: #212121;
+}
+
+
 
 .card {
   display: flex;
   flex-direction: column;
-  align-items: left;
   background-color:#2e879b;
   border: 1px solid #eceff1;
   border-radius: 8px;
@@ -90,6 +89,24 @@ input {
     margin: 10px;
     text-align: center;
   }
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 40px auto;
+}
+.container p {
+  margin: 10px;
+  text-align: center;
+}
+.correct-answer {
+  width: 60vw;
+  text-align: center;
+  margin: 40px auto;
+}
+.hidden {
+  display: none;
+}
   
 .card::after {
   content: " ";
