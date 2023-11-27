@@ -9,7 +9,9 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: #eff5f8;
 }
-
+h1 {
+  text-align: center;
+}
 h3 {
   font-size: 2em;
   margin: 0px;

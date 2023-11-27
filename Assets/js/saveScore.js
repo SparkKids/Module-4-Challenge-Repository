@@ -12,9 +12,9 @@ console.log("currentUser = " + currentUser);
 
 displayScore.innerText = "Your Score: " + mostRecentScore;
 
-username.addEventListener('keyup', () => {
-    saveScoreBtn.disabled = !username.value;
-});
+// username.addEventListener('keyup', () => {
+//     saveScoreBtn.disabled = !username.value;
+// });
 
 saveHighScore = (e) => {
     e.preventDefault();
