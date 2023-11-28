@@ -16,7 +16,7 @@ saveHighScore = (e) => {
 
     const score = {
         score: mostRecentScore,
-        name: username.value,
+        name: currentUser,
     };
     highScores.push(score);
     highScores.sort((a, b) => b.score - a.score);
