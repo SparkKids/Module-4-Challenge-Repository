@@ -15,7 +15,6 @@ startQuiz();
 // function loadQuestion() {
 // populates the questions object with the question, 4 answers and the correct answer
 function loadQuestions() {
-    console.log("function loadQuestions()");
     questions = [{
         q: "When the switch statement matches the expression with the given labels, how is the comparison done?",
         ans1: "Both the datatype and the result of the expression are compared.",
@@ -57,44 +56,31 @@ function loadQuestions() {
     },
 
     ];
-    // console.log("Load Questions: " + questions)
     return questions;
 }//function loadQuestions()
 
 function displayQuestion(question, h3El, liEls) {
-    console.log("function displayQuestion(question, h3El, liEls)");
-    console.log("displayQuestion qCtr = " + qCtr + " QUESTION_COUNT = " + QUESTION_COUNT);
     if (qCtr == QUESTION_COUNT) {
         localStorage.setItem('mostRecentScore', secondsRemaining);
         return window.location.assign('./saveScore.html');
     }
     h3El.innerText = question.q;
-    // console.log(question.q);
-    // console.log(question.ans1);
-    // console.log(question.ans2);
-    // console.log(question.ans3);
-    // console.log(question.ans4);
     liEls[0].innerText = "1. " + question.ans1;
     liEls[0].dataset.indexNumber = 0;
     liEls[0].dataset.isCorrect = liEls[0].dataset.indexNumber == question.correct;
-    // console.log("isCorrect[0] = " + liEls[0].dataset.isCorrect);
     liEls[1].innerText = "2. " + question.ans2;
     liEls[1].dataset.indexNumber = 1;
     liEls[1].dataset.isCorrect = liEls[1].dataset.indexNumber == question.correct;
-    // console.log("isCorrect[1] = " + liEls[1].dataset.isCorrect);
     liEls[2].innerText = "3. " + question.ans3;
     liEls[2].dataset.indexNumber = 2;
     liEls[2].dataset.isCorrect = liEls[2].dataset.indexNumber == question.correct;
-    // console.log("isCorrect[2] = " + liEls[2].dataset.isCorrect);
     liEls[3].innerText = "4. " + question.ans4;
     liEls[3].dataset.indexNumber = 3;
     liEls[3].dataset.isCorrect = liEls[3].dataset.indexNumber == question.correct;
-    // console.log("isCorrect[3] = " + liEls[3].dataset.isCorrect);
     acceptingAnswers = true;
 }//function displayQuestion(question, h3El, liEls)
 
 function addChoicesListeners() {
-    console.log("Begin function addChoicesListeners()");
     const choices = Array.from(document.getElementsByClassName('choice-text'));
 
     choices.forEach((choice) => {
@@ -105,10 +91,6 @@ function addChoicesListeners() {
             acceptingAnswers = false;
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset.indexNumber;
-            // console.log("Selected answer = " + selectedAnswer);
-            // console.log("Correct Answer? " + selectedChoice.dataset.isCorrect);
-            // console.log("Selected Choice class list " + selectedChoice.classList);
-            console.log("incorrectText " + incorrectText.innerText);
             if (selectedChoice.dataset.isCorrect == "true") {
                 answerClass = CORRECT_CLASS;
                 incorrectText.classList.add(HIDDEN_CLASS);
@@ -124,15 +106,12 @@ function addChoicesListeners() {
 
             setTimeout(() => {
                 selectedChoice.classList.remove(answerClass);
-                console.log("setTimeout qCtr = " + qCtr);
                 qCtr++;
                 if (qCtr == QUESTION_COUNT) {
-                    console.log("secondsRemaining = " + secondsRemaining);
                     localStorage.setItem('mostRecentScore', secondsRemaining);
                     return window.location.assign('./saveScore.html');
 
                 }
-                console.log("setTimeout before displayQuestion qCtr = " + qCtr);
                 displayQuestion(questions[qCtr], document.querySelector("h3"), document.querySelectorAll("li"));
             }, 1000);
         });
@@ -140,7 +119,6 @@ function addChoicesListeners() {
 }//function addChoicesListeners()
 function updateCountdown() {
     secondsRemaining--;
-    console.log("secondsRemaining = " + secondsRemaining);
     timerP.innerText = "Time: " + secondsRemaining;
     if (secondsRemaining == 0) {
         localStorage.setItem('mostRecentScore', secondsRemaining);
